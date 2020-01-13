@@ -189,6 +189,11 @@ const moveAndDrawSnake = function(game) {
   game.move();
   const snake = game.getSnakeStatus();
   const ghostSnake = game.getGhostSnakeStatus();
+  if (game.isFoodEaten()) {
+    eraseFood(game.getFoodStatus());
+    game.update();
+    drawFood(game.getFoodStatus());
+  }
   eraseTail(snake);
   drawSnake(snake);
   eraseTail(ghostSnake);
@@ -222,15 +227,6 @@ const setup = game => {
   drawGame(game);
 };
 
-const gameLoop = function(game) {
-  if (game.isFoodEaten()) {
-    eraseFood(game.getFoodStatus());
-    game.update();
-  }
-  animateSnakes(game);
-  drawFood(game.getFoodStatus());
-};
-
 const animateSnakes = game => {
   moveAndDrawSnake(game);
 };
@@ -251,5 +247,4 @@ const main = function() {
   setup(game);
   setInterval(animateSnakes, 350, game);
   setInterval(randomlyTurnSnake, 500, game);
-  setInterval(gameLoop, 350, game);
 };
