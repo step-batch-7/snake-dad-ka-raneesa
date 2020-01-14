@@ -1,5 +1,5 @@
 h1 {
-  text-align: center;
+  margin-left: 350px;
 }
 
 #grid {
@@ -17,6 +17,7 @@ h1 {
 
 .snake {
   background-color: black;
+  border-radius: 2.5px;
 }
 
 .ghost {
@@ -25,4 +26,14 @@ h1 {
 
 .food {
   background-color: red;
-} 
+  border-radius: 3.5px;
+}
+
+#scoreBoard {
+  width: 200px;
+  height: 100px;
+  margin: auto auto;
+  border: 1px solid black;
+  text-align: center;
+  color: darkblue;
+}
