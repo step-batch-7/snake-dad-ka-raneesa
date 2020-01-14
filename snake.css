@@ -1,5 +1,10 @@
 h1 {
-  margin-left: 350px;
+  text-align: center;
+}
+
+#snakeGame {
+  display: flex;
+  justify-content: space-between;
 }
 
 #grid {
@@ -30,10 +35,17 @@ h1 {
 }
 
 #scoreBoard {
-  width: 200px;
-  height: 100px;
-  margin: auto auto;
+  width: 150px;
+  margin: 0 auto;
   border: 1px solid black;
   text-align: center;
   color: darkblue;
+  font-size: larger;
+}
+
+.gameOver {
+  margin: 0 auto;
+  font-size: 40px;
+  text-align: center;
+  padding-top: 50px;
 }
