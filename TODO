@@ -23,5 +23,6 @@
 
 --DONE-- * Upon eating the food, snake should grow tall
 
+--DONE-- * Add a scoring mechanism
+
 * If snake touches itself or the walls, the game should be over
-* Add a scoring mechanism
