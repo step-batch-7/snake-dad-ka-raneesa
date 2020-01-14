@@ -121,22 +121,22 @@ class Game {
     return { snake, food, score: this.scoreCard.points };
   }
 
-  moveSnake() {
-    this.snake.move();
+  isFoodEaten() {
     const snakeLocation = this.snake.location;
     const foodLocation = this.food.position;
-    if (isFoodEaten(snakeLocation, foodLocation)) {
+    return snakeLocation.some(part =>
+      part.every((coordinate, index) => coordinate === foodLocation[index])
+    );
+  }
+
+  moveSnake() {
+    this.snake.move();
+    if (this.isFoodEaten()) {
       this.food.generateNewFood();
       this.snake.grow();
       this.scoreCard.update(1);
     }
   }
-}
-
-const isFoodEaten = function(snakeLocation, foodLocation) {
-  return snakeLocation.some(part =>
-    part.every((coordinate, index) => coordinate === foodLocation[index])
-  );
 }
 
 const NUM_OF_COLS = 100;
