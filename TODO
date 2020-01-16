@@ -5,7 +5,7 @@
 
 --DONE-- * Create a key listener on the grid so that the snake can move
 --DONE-- * Move the snake one cell at a time from left to right
---DONE-- * Extract a Snake class that is responsible for snake's behaviour
+--DONE-- * Extract a Snake class that is responsible for snake's behavior
 --DONE-- * Create a ghost snake that randomly roams around
 
 --DONE-- * Extract a Direction class that is responsible for the direction 

@@ -29,11 +29,9 @@ class Game {
   }
 
   isFoodEaten() {
-    const snakeLocation = this.snake.location;
-    const foodLocation = this.food.position;
-    return snakeLocation.some(part =>
-      part.every((coordinate, index) => coordinate === foodLocation[index])
-    );
+    const [headX, headY] = this.snake.head;
+    const [foodX, foodY] = this.food.position;
+    return headX == foodX && headY == foodY;
   }
 
   hasCrossedBoundaries() {

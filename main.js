@@ -123,12 +123,12 @@ const animateSnakes = game => {
   updateAndDrawGame(game);
 };
 
-// const randomlyTurnSnake = ghostSnake => {
-//   let x = Math.random() * 100;
-//   if (x > 80) {
-//     ghostSnake.turnLeft();
-//   }
-// };
+const randomlyTurnSnake = ghostSnake => {
+  let x = Math.random() * 100;
+  if (x > 80) {
+    ghostSnake.turnLeft();
+  }
+};
 
 let gameAnimation;
 
@@ -140,5 +140,5 @@ const main = function() {
   const game = new Game(snake, ghostSnake, food, scoreCard, NUM_OF_COLS, NUM_OF_ROWS);
   setup(game);
   gameAnimation = setInterval(animateSnakes, 100, game);
-  // setInterval(randomlyTurnSnake, 200, ghostSnake);
+  setInterval(randomlyTurnSnake, 200, ghostSnake);
 };
