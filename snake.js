@@ -41,10 +41,12 @@ class Snake {
     this.positions.push([headX + deltaX, headY + deltaY]);
   }
 
-  hasCrossedBoundaries() {
-    const [headX, headY] = this.head;
-    const isHeadXOutOfCols = headX < 0 || headX >= NUM_OF_COLS;
-    const isHeadYOutOfRows = headY < 0 || headY >= NUM_OF_ROWS;
-    return isHeadXOutOfCols || isHeadYOutOfRows;
+  hasTouchedItself() {
+    const bodyPositions = this.location.slice(0, -1);
+    const booleanValue = bodyPositions.some(([bodyX, bodyY]) => {
+      const [headX, headY] = this.head;
+      return bodyX == headX && bodyY == headY;
+    })
+    return booleanValue;
   }
 }

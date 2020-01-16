@@ -135,9 +135,9 @@ let gameAnimation;
 const main = function() {
   const snake = initSnake();
   const ghostSnake = initGhostSnake();
-  const food = new Food(99, 25, [0, 0]);
+  const food = new Food(40, 45, [0, 0], NUM_OF_COLS, NUM_OF_ROWS);
   const scoreCard = new ScoreCard(0);
-  const game = new Game(snake, ghostSnake, food, scoreCard);
+  const game = new Game(snake, ghostSnake, food, scoreCard, NUM_OF_COLS, NUM_OF_ROWS);
   setup(game);
   gameAnimation = setInterval(animateSnakes, 100, game);
   // setInterval(randomlyTurnSnake, 200, ghostSnake);
