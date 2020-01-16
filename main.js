@@ -68,18 +68,26 @@ const gameOver = () => {
   document.body.appendChild(gameOver);
 };
 
+const updateSnake = function(snake) {
+  drawSnake(snake);
+  eraseTail(snake);
+}
+
+const updateFood = function(food) {
+  drawFood(food);
+  eraseFood(food);
+}
+
 const updateAndDrawGame = function(game) {
   const { food, snake, score } = game.getStatus();
+  game.moveSnake();
   if (game.isGameOver) {
     clearInterval(gameAnimation);
     gameOver();
     return;
   }
-  game.moveSnake();
-  eraseTail(snake);
-  eraseFood(food);
-  drawSnake(snake);
-  drawFood(food);
+  updateSnake(snake);
+  updateFood(food);
   assignScore(score);
 };
 
