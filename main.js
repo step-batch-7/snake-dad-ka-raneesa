@@ -31,6 +31,7 @@ const createGrids = function() {
 };
 
 const eraseTail = function(snake) {
+  console.log(snake.species)
   let [colId, rowId] = snake.previousTail;
   const cell = getCell(colId, rowId);
   cell.classList.remove(snake.species);
@@ -52,7 +53,7 @@ const drawFood = function(food) {
 const eraseFood = function(food) {
   let [colId, rowId] = food.previousLocation;
   const cell = getCell(colId, rowId);
-  cell.classList.remove("food");
+  cell.classList.remove('food');
 };
 
 const assignScore = function(score) {
@@ -61,7 +62,6 @@ const assignScore = function(score) {
 }
 
 const gameOver = () => {
-  document.body.removeChild(getGrid());
   const gameOver = document.createElement('div');
   gameOver.innerText = 'Game Over';
   gameOver.className = 'gameOver';
@@ -69,8 +69,8 @@ const gameOver = () => {
 };
 
 const updateSnake = function(snake) {
-  drawSnake(snake);
   eraseTail(snake);
+  drawSnake(snake);
 }
 
 const updateFood = function(food) {
@@ -79,14 +79,16 @@ const updateFood = function(food) {
 }
 
 const updateAndDrawGame = function(game) {
-  const { food, snake, score } = game.getStatus();
   game.moveSnake();
+  game.moveGhostSnake();
+  const { food, ghostSnake, snake, score } = game.getStatus();
   if (game.isGameOver) {
     clearInterval(gameAnimation);
     gameOver();
     return;
   }
   updateSnake(snake);
+  updateSnake(ghostSnake);
   updateFood(food);
   assignScore(score);
 };
@@ -127,12 +129,12 @@ const setup = game => {
   updateAndDrawGame(game);
 };
 
-// const randomlyTurnSnake = ghostSnake => {
-//   let x = Math.random() * 100;
-//   if (x > 80) {
-//     ghostSnake.turnLeft();
-//   }
-// };
+const randomlyTurnSnake = ghostSnake => {
+  let x = Math.random() * 100;
+  if (x > 50) {
+    ghostSnake.turnLeft();
+  }
+};
 
 let gameAnimation;
 
@@ -144,5 +146,5 @@ const main = function() {
   const game = new Game(snake, ghostSnake, food, scoreCard, NUM_OF_COLS, NUM_OF_ROWS);
   setup(game);
   gameAnimation = setInterval(updateAndDrawGame, 100, game);
-  // setInterval(randomlyTurnSnake, 200, game.ghostSnake);
+  setInterval(randomlyTurnSnake, 200, game.ghostSnake);
 };

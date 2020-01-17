@@ -26,3 +26,5 @@
 --DONE-- * Add a scoring mechanism
 
 --DONE-- * If snake touches itself or the walls, the game should be over
+
+--DONE-- * Give the ghost snake the ability to eat the food.

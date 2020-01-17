@@ -21,20 +21,25 @@ class Game {
       species: this.snake.species,
       previousTail: this.snake.tail
     };
+    const ghostSnake = {
+      location: this.ghostSnake.location,
+      species: this.ghostSnake.species,
+      previousTail: this.ghostSnake.tail
+    };
     const food = {
       location: this.food.position,
       previousLocation: this.food.previousFoodLocation
     };
-    return { snake, food, score: this.scoreCard.points };
+    return { snake, food, ghostSnake, score: this.scoreCard.points };
   }
 
-  isFoodEaten() {
-    const [headX, headY] = this.snake.head;
+  isFoodEaten(snake) {
+    const [headX, headY] = snake.head;
     const [foodX, foodY] = this.food.position;
     return headX == foodX && headY == foodY;
   }
 
-  hasCrossedBoundaries() {
+  isCrossedBoundaries() {
     const [headX, headY] = this.snake.head;
     const isHeadXOutOfCols = headX < 0 || headX >= this.NUM_OF_COLS;
     const isHeadYOutOfRows = headY < 0 || headY >= this.NUM_OF_ROWS;
@@ -43,11 +48,18 @@ class Game {
 
   moveSnake() {
     this.snake.move();
-    this.isGameOver = this.hasCrossedBoundaries() || this.snake.hasTouchedItself();
-    if (this.isFoodEaten()) {
+    this.isGameOver = this.isCrossedBoundaries() || this.snake.hasTouchedItself();
+    if (this.isFoodEaten(this.snake)) {
       this.food.generateNewFood();
       this.snake.grow();
       this.scoreCard.update(1);
+    }
+  }
+  moveGhostSnake() {
+    this.ghostSnake.move();
+    if (this.isFoodEaten(this.ghostSnake)) {
+      this.food.generateNewFood();
+      this.ghostSnake.grow();
     }
   }
 }
