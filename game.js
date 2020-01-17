@@ -46,9 +46,17 @@ class Game {
     return isHeadXOutOfCols || isHeadYOutOfRows;
   }
 
+  isSnakeTouchedGhostSnake() {
+    const [snakeHeadX, snakeHeadY] = this.snake.head;
+    const ghostSnakeBody = this.ghostSnake.location;
+    return ghostSnakeBody.some(([partX, partY]) => {
+      return partX == snakeHeadX && partY == snakeHeadY;
+    });
+  }
+
   moveSnake() {
     this.snake.move();
-    this.isGameOver = this.isCrossedBoundaries() || this.snake.hasTouchedItself();
+    this.isGameOver = this.isCrossedBoundaries() || this.isSnakeTouchedGhostSnake() || this.snake.hasTouchedItself();
     if (this.isFoodEaten(this.snake)) {
       this.food.generateNewFood();
       this.snake.grow();
