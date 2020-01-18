@@ -6,7 +6,6 @@ class Game {
     this.ghostSnake = ghostSnake;
     this.food = food;
     this.scoreCard = scoreCard;
-    this.isGameOver = false;
     this.NUM_OF_COLS = NUM_OF_COLS;
     this.NUM_OF_ROWS = NUM_OF_ROWS;
   }
@@ -46,23 +45,32 @@ class Game {
     return isHeadXOutOfCols || isHeadYOutOfRows;
   }
 
-  isSnakeTouchedGhostSnake() {
-    const [snakeHeadX, snakeHeadY] = this.snake.head;
+  areSnakesTouchedEachOther() {
+    const snakeBody = this.snake.location;
     const ghostSnakeBody = this.ghostSnake.location;
-    return ghostSnakeBody.some(([partX, partY]) => {
-      return partX == snakeHeadX && partY == snakeHeadY;
+    return snakeBody.some(([snakeX, snakeY]) => {
+      return ghostSnakeBody.some(([ghostSnakeX, ghostSnakeY]) => {
+        return snakeX === ghostSnakeX && snakeY === ghostSnakeY;
+      });
     });
+  }
+
+  isGameOver() {
+    return (
+      this.isCrossedBoundaries() ||
+      this.areSnakesTouchedEachOther() ||
+      this.snake.hasTouchedItself());
   }
 
   moveSnake() {
     this.snake.move();
-    this.isGameOver = this.isCrossedBoundaries() || this.isSnakeTouchedGhostSnake() || this.snake.hasTouchedItself();
     if (this.isFoodEaten(this.snake)) {
       this.food.generateNewFood();
       this.snake.grow();
       this.scoreCard.update(1);
     }
   }
+
   moveGhostSnake() {
     this.ghostSnake.move();
     if (this.isFoodEaten(this.ghostSnake)) {

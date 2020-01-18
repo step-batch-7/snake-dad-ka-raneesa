@@ -27,6 +27,7 @@ h1 {
 
 .ghost {
   background-color: gray;
+  border-radius: 2.5px;
 }
 
 .food {

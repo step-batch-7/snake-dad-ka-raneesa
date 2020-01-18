@@ -10,7 +10,7 @@ const SCORE_BOARD_ID = 'scoreBoard';
 const getGrid = () => document.getElementById(GRID_ID);
 const getBoard = () => document.getElementById(SCORE_BOARD_ID);
 
-const getCellId = (colId, rowId) => colId + '_' + rowId;
+const getCellId = (colId, rowId) => `c${colId}_${rowId}`;
 const getCell = (colId, rowId) =>
   document.getElementById(getCellId(colId, rowId));
 
@@ -31,7 +31,6 @@ const createGrids = function() {
 };
 
 const eraseTail = function(snake) {
-  console.log(snake.species)
   let [colId, rowId] = snake.previousTail;
   const cell = getCell(colId, rowId);
   cell.classList.remove(snake.species);
@@ -62,6 +61,8 @@ const assignScore = function(score) {
 }
 
 const gameOver = () => {
+  clearInterval(gameAnimation);
+  clearInterval(randomlyTurn);
   const gameOver = document.createElement('div');
   gameOver.innerText = 'Game Over';
   gameOver.className = 'gameOver';
@@ -82,8 +83,7 @@ const updateAndDrawGame = function(game) {
   game.moveSnake();
   game.moveGhostSnake();
   const { food, ghostSnake, snake, score } = game.getStatus();
-  if (game.isGameOver) {
-    clearInterval(gameAnimation);
+  if (game.isGameOver()) {
     gameOver();
     return;
   }
@@ -136,7 +136,7 @@ const randomlyTurnSnake = ghostSnake => {
   }
 };
 
-let gameAnimation;
+let gameAnimation, randomlyTurn;
 
 const main = function() {
   const snake = initSnake();
@@ -146,5 +146,5 @@ const main = function() {
   const game = new Game(snake, ghostSnake, food, scoreCard, NUM_OF_COLS, NUM_OF_ROWS);
   setup(game);
   gameAnimation = setInterval(updateAndDrawGame, 100, game);
-  setInterval(randomlyTurnSnake, 200, game.ghostSnake);
+  randomlyTurn = setInterval(randomlyTurnSnake, 200, game.ghostSnake);
 };
