@@ -27,7 +27,8 @@ class Game {
     };
     const food = {
       location: this.food.position,
-      previousLocation: this.food.previousFoodLocation
+      previousLocation: this.food.previousFoodLocation,
+      type: this.food.type
     };
     return { snake, food, ghostSnake, score: this.scoreCard.points };
   }

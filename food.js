@@ -1,10 +1,11 @@
 'use strict'
 
 class Food {
-  constructor(colId, rowId, previousFood, NUM_OF_COLS, NUM_OF_ROWS) {
+  constructor(colId, rowId, previousFood, type, NUM_OF_COLS, NUM_OF_ROWS) {
     this.colId = colId;
     this.rowId = rowId;
     this.previousFood = previousFood;
+    this.type = type;
     this.NUM_OF_COLS = NUM_OF_COLS;
     this.NUM_OF_ROWS = NUM_OF_ROWS;
   }

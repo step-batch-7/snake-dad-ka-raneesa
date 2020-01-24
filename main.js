@@ -46,13 +46,13 @@ const drawSnake = function(snake) {
 const drawFood = function(food) {
   let [colId, rowId] = food.location;
   const cell = getCell(colId, rowId);
-  cell.classList.add("food");
+  cell.classList.add(food.type);
 }
 
 const eraseFood = function(food) {
   let [colId, rowId] = food.previousLocation;
   const cell = getCell(colId, rowId);
-  cell.classList.remove('food');
+  cell.classList.remove(food.type);
 };
 
 const assignScore = function(score) {
@@ -141,7 +141,7 @@ let gameAnimation, randomlyTurn;
 const main = function() {
   const snake = initSnake();
   const ghostSnake = initGhostSnake();
-  const food = new Food(40, 45, [0, 0], NUM_OF_COLS, NUM_OF_ROWS);
+  const food = new Food(40, 45, [0, 0], "food", NUM_OF_COLS, NUM_OF_ROWS);
   const scoreCard = new ScoreCard(0);
   const game = new Game(snake, ghostSnake, food, scoreCard, NUM_OF_COLS, NUM_OF_ROWS);
   setup(game);
